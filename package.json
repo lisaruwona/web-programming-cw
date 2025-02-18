@@ -1,0 +1,22 @@
+{
+  "name": "Web Programming Coursework",
+  "version": "1.0.0",
+  "description": "race contorl coursework",
+  "main": "script.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lisaruwona/web-programming-cw.git"
+  },
+  "author": "Lisa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lisaruwona/web-programming-cw/issues"
+  },
+  "homepage": "https://github.com/lisaruwona/web-programming-cw#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
