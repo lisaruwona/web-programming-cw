@@ -1,7 +1,7 @@
 {
   "name": "Web Programming Coursework",
   "version": "1.0.0",
-  "description": "race contorl coursework",
+  "description": "race control coursework",
   "main": "script.js",
   "scripts": {
     "run": "node index.js"
