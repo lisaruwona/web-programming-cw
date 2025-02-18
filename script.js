@@ -1,3 +1,5 @@
-document.querySelector('.timer-section').addEventListener('click', function(){
+const timerPage = document.querySelector('.timer-section');
+
+timerPage.addEventListener('click', function(){
     window.location.href = 'timer.html';
 })
