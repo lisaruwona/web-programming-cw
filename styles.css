@@ -26,9 +26,11 @@ ul {
 .timer-section {
     background-color: #4169e1;
     flex: 1;
+    cursor: pointer;
 }
 
 .runner-id-section {
     background-color: orange;
     flex: 1;
+    cursor: pointer;
 }
