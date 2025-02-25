@@ -4,6 +4,10 @@ h2 {
     font-family: 'Courier New', Courier, monospace;
 }
 
+p{
+    color: white;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -24,7 +28,7 @@ ul {
 }
 
 .timer-section {
-    background-color: #4169e1;
+    background-color: black;
     flex: 1;
     cursor: pointer;
 }
