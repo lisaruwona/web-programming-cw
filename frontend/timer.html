@@ -6,21 +6,31 @@
 <title>Timer</title>
 <link rel="stylesheet" href="timer.css">
 
+
 </head>
 
 <body>
    <div class="timer-container">
     <div id="display">
-        00:00:00:00
+        00:00:00.00
     </div>
 
     <div id="buttons">
-        <button id = "go" onclick="go()"> GO </button>
-
+        <button id="lap-btn"> Lap </button>
+        <button id="start-btn"> Start </button>
+        <button id="stop-btn" style="display : none;" > Stop </button>
+        <button id="reset-btn" style="display : none;"> Reset </button>
+        <!-- temporarily disabling the stop and reset button above... -->
     </div>
-   </div>
-   
-</body>
 
-<script src="script.js"></script>
-</html>
+    <div class="laps-container">
+        <div id="lap-text">
+            <p>Position</p>
+            <p>Time</p>
+        </div>
+        <ul id="lap-data"> </ul>
+    </div>
+
+   </div>
+   <script src="script.js"></script>
+</body>
