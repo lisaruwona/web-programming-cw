@@ -6,18 +6,21 @@
 const display = document.getElementById("display");
 const startButton = document.getElementById("start-btn");
 const stopButton = document.getElementById("stop-btn");
+const resetButton = document.getElementById("reset-btn");
 
 const lapButton = document.getElementById("lap-btn");
+const lapData = document.getElementById("lap-data");
 lapButton.disabled = true;
 
 let timer = null;
 let startTime = 0;
 let elapsedTime = 0; 
 let isRunning = false;
+let count = 0;
 let lapNow = null;
 
-function prepareStartListener() {
 
+function prepareStartListener() {
     startButton.addEventListener("click", () => {
         if (!isRunning) {
             startTime = Date.now() - elapsedTime;
@@ -37,6 +40,25 @@ function prepareStopListener() {
             elapsedTime = Date.now() - startTime;
             isRunning = false;
         }
+        lapButton.setAttribute("style", "display:none");
+        resetButton.setAttribute("style", "display : block");
+        stopButton.setAttribute("style", "display:none");
+        startButton.setAttribute("style", "display:block");
+    });
+}
+
+function prepareResetListener() {
+    resetButton.addEventListener("click", () => {
+        display.textContent = `00:00:00.00`;
+        elapsedTime = 0;
+        count = 0;
+        clearInterval(timer);
+        for (let i = lapData.children.length - 1; i >= 0; i--){
+            lapData.removeChild(lapData.children[i]);
+            }
+        resetButton.setAttribute("style", "display:none");
+        startButton.setAttribute("style", "dislpay: block");
+        lapButton.setAttribute("style", "display:block");
     });
 }
 
@@ -68,12 +90,11 @@ function formatTime(ms) {
 }
 
 function prepareLapListener() {
-    let count = 0;
-    const lapData = document.getElementById("lap-data");
     lapButton.addEventListener("click", () => {
         count++;
         const newLapElement = document.createElement("li");
-        newLapElement.innerHTML = `${count}   ${formatTime(elapsedTime)}`;
+        newLapElement.className = "lap-li";
+        newLapElement.innerHTML = `<span class="lap-position">${count}</span> <span class = "lap-time">${formatTime(elapsedTime)}</span>`;
         lapData.appendChild(newLapElement);
     })
 }
@@ -81,3 +102,4 @@ function prepareLapListener() {
 prepareStartListener();
 prepareStopListener();
 prepareLapListener();
+prepareResetListener();
