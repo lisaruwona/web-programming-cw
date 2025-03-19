@@ -12,6 +12,9 @@ const lapButton = document.getElementById("lap-btn");
 const lapData = document.getElementById("lap-data");
 lapButton.disabled = true;
 
+const submitButton = document.getElementById("submit-btn");
+submitButton.setAttribute("style", "display:none");
+
 let timer = null;
 let startTime = 0;
 let elapsedTime = 0; 
@@ -29,7 +32,10 @@ function prepareStartListener() {
         }
         startButton.setAttribute("style", "display:none");
         stopButton.setAttribute("style", "display:block");
+        lapButton.setAttribute("style", "display:block");
         lapButton.disabled = false;
+        resetButton.setAttribute("style", "display:none");
+        submitButton.setAttribute("style", "display:none");
     });
 }
 
@@ -44,6 +50,7 @@ function prepareStopListener() {
         resetButton.setAttribute("style", "display : block");
         stopButton.setAttribute("style", "display:none");
         startButton.setAttribute("style", "display:block");
+        submitButton.setAttribute("style", "display:block");
     });
 }
 
@@ -58,7 +65,9 @@ function prepareResetListener() {
             }
         resetButton.setAttribute("style", "display:none");
         startButton.setAttribute("style", "dislpay: block");
-        lapButton.setAttribute("style", "display:block");
+        lapButton.setAttribute("style", "display : block");
+        lapButton.disabled = true;
+        submitButton.setAttribute("style", "display:none");
     });
 }
 
