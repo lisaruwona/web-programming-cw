@@ -1,0 +1,40 @@
+h2 {
+    text-align: center;
+    color: azure;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+p{
+    color: white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.timer-section {
+    background-color: black;
+    flex: 1;
+    cursor: pointer;
+}
+
+.runner-id-section {
+    background-color: blue;
+    flex: 1;
+    cursor: pointer;
+}

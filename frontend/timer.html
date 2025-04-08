@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timer</title>
-<link rel="stylesheet" href="timer.css">
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-   <div class="timer-container">
+    <header>
+        Race-ify
+    </header>
+
+<main class= "views">
+
+    <section id="timer-view">
+
+    <div class="timer-container">
+
     <div id="display">
         00:00:00.00
     </div>
@@ -20,19 +28,38 @@
         <button id="reset-btn" style="display : none;"> Reset </button>
         <button id="start-btn"> Start </button>
         <button id="stop-btn" style="display : none;" > Stop </button>
-        <!-- temporarily disabling the stop and reset button above... -->
     </div>
 
     <div class="laps-container">
-        <div id="lap-text">
+        <div id = "lap-text">
             <p>Position</p>
             <p>Time</p>
         </div>
         <ul id="lap-data"> </ul>
-
     </div>
+
     <button id="submit-btn">Submit</button>
 
-   </div>
+    </div>
+    </section>
+
+    <section id="registration-view" style="display: none;">
+        <form id="runner-form"></form>
+
+    </section>
+
+    <section id="settings-view" style="display: none;">
+
+    </section>
+
+</main>
+
+
+    <nav class="nav-items">
+            <button class="nav-link"> Timer </button>
+            <button class="nav-link"> Runner </button>
+            <button class="nav-link"> Settings </button>
+    </nav>
+    
    <script src="script.js"></script>
 </body>
