@@ -22,6 +22,11 @@ let isRunning = false;
 let count = 0;
 // let lapNow = null;
 
+const views = {
+  timer: document.getElementById('timer-view'),
+  registration: document.getElementById('registration-view'),
+  settings: document.getElementById('settings-view'),
+};
 
 function prepareStartListener() {
   startButton.addEventListener('click', () => {
@@ -47,7 +52,7 @@ function prepareStopListener() {
       isRunning = false;
     }
     lapButton.setAttribute('style', 'display:none');
-    resetButton.setAttribute('style', 'display : block');
+    resetButton.setAttribute('style', 'display:block');
     stopButton.setAttribute('style', 'display:none');
     startButton.setAttribute('style', 'display:block');
     submitButton.setAttribute('style', 'display:block');
@@ -64,8 +69,8 @@ function prepareResetListener() {
       lapData.removeChild(lapData.children[i]);
     }
     resetButton.setAttribute('style', 'display:none');
-    startButton.setAttribute('style', 'dislpay: block');
-    lapButton.setAttribute('style', 'display : block');
+    startButton.setAttribute('style', 'display:block');
+    lapButton.setAttribute('style', 'display:block');
     lapButton.disabled = true;
     submitButton.setAttribute('style', 'display:none');
   });
@@ -105,6 +110,17 @@ function prepareLapListener() {
     lapData.appendChild(newLapElement);
   });
 }
+
+function showView(viewName) {
+  for (const view of Object.values(views)) {
+    view.style.display = 'none';
+  }
+  views[viewName].style.display = 'block';
+}
+
+document.getElementById('timer-btn').addEventListener('click', () => showView('timer'));
+document.getElementById('runner-btn').addEventListener('click', () => showView('registration'));
+document.getElementById('settings-btn').addEventListener('click', () => showView('settings'));
 
 prepareStartListener();
 prepareStopListener();

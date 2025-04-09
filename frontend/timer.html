@@ -4,62 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer</title>
+    <title>Race-ify</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <header>
-        Race-ify
+        <h2>Race-ify</h2>
     </header>
 
 <main class= "views">
+    <section id="app"></section>
+        <section id="timer-view" class="view">
+            <div class="timer-container">
+            <div id="display">
+                00:00:00.00
+            </div>
+            <div class="buttons">
+                <button id="lap-btn"> Lap </button>
+                <button id="reset-btn" style="display : none;"> Reset </button>
+                <button id="start-btn"> Start </button>
+                <button id="stop-btn" style="display : none;" > Stop </button>
+            </div>
 
-    <section id="timer-view">
+            <div class="laps-container">
+                <div id = "lap-text">
+                <p>Position</p>
+                <p>Time</p>
+                </div>
+                <ul id="lap-data"> </ul>
+            </div>
 
-    <div class="timer-container">
+             <button id="submit-btn" type="submit">Submit</button>
 
-    <div id="display">
-        00:00:00.00
-    </div>
-
-    <div class="buttons">
-        <button id="lap-btn"> Lap </button>
-        <button id="reset-btn" style="display : none;"> Reset </button>
-        <button id="start-btn"> Start </button>
-        <button id="stop-btn" style="display : none;" > Stop </button>
-    </div>
-
-    <div class="laps-container">
-        <div id = "lap-text">
-            <p>Position</p>
-            <p>Time</p>
         </div>
-        <ul id="lap-data"> </ul>
-    </div>
-
-    <button id="submit-btn">Submit</button>
-
-    </div>
     </section>
 
-    <section id="registration-view" style="display: none;">
-        <form id="runner-form"></form>
+    <section id="registration-view" class="view">
+        <form action="" id="runner-form">
+            <div class="registration-form">
 
+                <h2>Registration Form</h2>
+
+                <label for="name"><b>First Name:</b></label>
+                <input type="text" placeholder="Enter Your First Name" name="name" id="firstName" required>
+
+                <label for="surname"><b>Surname:</b> </label>
+                <input type="text" placeholder="Enter Your Surname" name="surname" id="surname" required>
+
+                <label for="runnerID"><b>Runner ID:</b></label>
+                <input type="number" placeholder="Enter Your Runner ID">
+
+                <button id="submit-form" type="submit">Submit</button>
+
+            </div>
+        </form>
     </section>
 
-    <section id="settings-view" style="display: none;">
+    <section id="settings-view" class="view">
 
     </section>
 
 </main>
 
-
-    <nav class="nav-items">
-            <button class="nav-link"> Timer </button>
-            <button class="nav-link"> Runner </button>
-            <button class="nav-link"> Settings </button>
-    </nav>
+<nav class="nav-items">
+    <button id="timer-btn" class="nav-link"> Timer </button>
+    <button id="runner-btn" class="nav-link"> Runner </button>
+    <button id="settings-btn" class="nav-link"> Settings </button>
+</nav>
     
-   <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
