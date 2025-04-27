@@ -1,12 +1,12 @@
 const navigateTo = url => {
-    history.pushState(null, null, url);
-    router();
+  history.pushState(null, null, url);
+  router();
 };
 
 const router = async () => {
-    const routes = [
-        { path : "/", view : () => console.log("Viewing Dashboard") },
-        { path : "/timer", view : () => console.log("Viewing timer") },
+  const routes = [
+    { path: '/', view: () => console.log('Viewing Dashboard') },
+    { path: "/timer", view : () => console.log("Viewing timer") },
         { path : "/register-runner", view : () => console.log("Viewing runner registration") },
     ];
 

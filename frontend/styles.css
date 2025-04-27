@@ -2,6 +2,11 @@
     background-color: rgb(11, 10, 10);
 }
 
+p {
+    color: white;
+    font-family: sans-serif;
+}
+
 h2 {
     font-family: sans-serif;
     color: white;
@@ -117,6 +122,16 @@ header {
     flex-direction: column;
 }
 
+#lap-data {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    max-height: 350px;
+    overflow-y: auto;
+    color: #fff;
+}
+
 #lap-text {
     display: flex;
     justify-content: center;
@@ -126,16 +141,6 @@ header {
     font-family: sans-serif;
     font-size: 1.5rem;
     
-}
-
-#lap-data {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-    max-height: 350px;
-    overflow-y: auto;
-    color: #fff;
 }
 
 .lap-li {
@@ -152,7 +157,7 @@ header {
 }
 
 #submit-btn {
-    background-color: hsl(197, 77%, 45%);
+    background-color: blue;
     align-self: flex-end;
     margin-right: 30px;
     margin-top: 10px;
@@ -164,6 +169,23 @@ header {
     position: a;
     border-radius: 10%;
     cursor: pointer;
+}
+
+.upload-inner {
+    background-color: grey;
+    border-radius: 20%;
+    padding: 15px 25px;
+    text-align: center;
+    width: 380px;
+}
+
+.upload-inner h2 {
+    margin: 0;
+}
+
+.upload-inner p {
+    line-height: 24px;
+    margin: 10px 0;
 }
 
 nav {
@@ -202,7 +224,8 @@ nav {
     flex-direction: column;
     gap: 10px;
     max-width: 420px;
-    height: 400px;
+    height: 320px;
+    margin: 0 auto;
     background-color: #252525;
     border-radius: 4rem;
     padding: 20px;
@@ -231,10 +254,50 @@ input {
     border: 0.25rem, solid;
     color: #fff;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-radius: 10%;
     cursor: pointer;
 }
 
+.runners-container {
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    height: 400px;
+    scroll-behavior: smooth;
+    flex-direction: column;
+}
 
+#runner-data {
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    padding: 20px;
+    margin: 0;
+    max-height: 230px;
+    overflow-y: auto;
+}
 
+#runner-text {
+    display: flex;
+    justify-content: center;
+    gap: 170px;
+    width: 100%;
+    color: white;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+}
+
+.runner-li {
+    display: flex;
+    justify-content: center;
+    gap: 220px;
+    width: fit-content;
+    padding: 10px;
+    list-style: none;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    border-bottom: solid grey;
+    /* border-width: 100%; */
+    color: white;
+}

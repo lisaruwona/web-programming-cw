@@ -1,8 +1,3 @@
-// const timerPage = document.querySelector('.timer-section');
-// timerPage.addEventListener('click', async function(){
-// window.location.href = 'timer.html';
-// })
-
 const display = document.getElementById('display');
 const startButton = document.getElementById('start-btn');
 const stopButton = document.getElementById('stop-btn');
@@ -15,12 +10,20 @@ lapButton.disabled = true;
 const submitButton = document.getElementById('submit-btn');
 submitButton.setAttribute('style', 'display:none');
 
+// const uploadBtn = document.getElementById('upload-results');
+// const cancelBtn = document.getElementById('cancel-btn');
+// const uploadChecker = document.getElementById('upload-inner');
+
+const runnerData = document.getElementById('runner-data');
+const submitForm = document.getElementById('submit-form');
+
 let timer = null;
 let startTime = 0;
 let elapsedTime = 0;
 let isRunning = false;
 let count = 0;
-// let lapNow = null;
+const laps = [];
+let runnerCount = 0;
 
 const views = {
   timer: document.getElementById('timer-view'),
@@ -68,6 +71,7 @@ function prepareResetListener() {
     for (let i = lapData.children.length - 1; i >= 0; i--) {
       lapData.removeChild(lapData.children[i]);
     }
+    laps.length = 0;
     resetButton.setAttribute('style', 'display:none');
     startButton.setAttribute('style', 'display:block');
     lapButton.setAttribute('style', 'display:block');
@@ -106,8 +110,10 @@ function prepareLapListener() {
     count++;
     const newLapElement = document.createElement('li');
     newLapElement.className = 'lap-li';
-    newLapElement.innerHTML = `<span class="lap-position">${count}</span> <span class = "lap-time">${formatTime(elapsedTime)}</span>`;
+    newLapElement.innerHTML = `<span class = "lap-position">${count}</span> <span class = "lap-time">${formatTime(elapsedTime)}</span>`;
     lapData.appendChild(newLapElement);
+    const lap = { position: count, time: formatTime(elapsedTime) };
+    laps.push(lap);
   });
 }
 
@@ -122,7 +128,69 @@ document.getElementById('timer-btn').addEventListener('click', () => showView('t
 document.getElementById('runner-btn').addEventListener('click', () => showView('registration'));
 document.getElementById('settings-btn').addEventListener('click', () => showView('settings'));
 
+function generateRandomString(length) {
+  const chars = 'ABCDEFGHIJKLMONPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    result += chars[randomIndex];
+  }
+  return result;
+}
+
+let positionCounter = 0;
+function nextPosition() {
+  return ++positionCounter;
+}
+
+function addNewRunner() {
+  submitForm.addEventListener('click', (event) => {
+    event.preventDefault();
+    runnerCount++;
+    const newRunner = document.createElement('li');
+    newRunner.className = 'runner-li';
+    newRunner.innerHTML = `<span class = 'runnerID'> ${generateRandomString(5)} </span> <span class = 'runner-id'> ${nextPosition()} </span>`;
+    runnerData.appendChild(newRunner);
+  });
+}
+
+// uploadBtn.addEventListener('submit', () => {
+//   uploadChecker.classList.add('open');
+// });
+
+// cancelBtn.addEventListener('click', () => {
+//   uploadChecker.classList.remove('open');
+// });
+
+
+submitButton.addEventListener('click', async function (event) {
+  event.preventDefault();
+  // const lapPosition = document.getElementById('lap-position');
+  // const lapTime = document.getElementById('lap-time');
+
+
+  try {
+    const response = await fetch('http://localhost:3000/results', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(laps),
+    });
+
+    const result = await response.json();
+    if (response.status === 201) {
+      alert(result.message);
+    }
+  } catch (error) {
+    alert('An error occured: ' + error.message);
+  }
+});
+
+
 prepareStartListener();
 prepareStopListener();
 prepareLapListener();
 prepareResetListener();
+addNewRunner();

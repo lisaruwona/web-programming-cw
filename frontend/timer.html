@@ -37,6 +37,13 @@
 
              <button id="submit-btn" type="submit">Submit</button>
 
+                <!-- <div class="upload-inner">
+                    <h2>Ready to Upload?</h2>
+                    <p>Pressing upload means you cannot make any additional changes to the results. </p>
+                    <button id="cancel-btn"> Cancel </button>
+                    <button id="upload-results"> Upload </button>
+                </div> -->
+
         </div>
     </section>
 
@@ -46,16 +53,25 @@
 
                 <h2>Registration Form</h2>
 
-                <label for="name"><b>First Name:</b></label>
-                <input type="text" placeholder="Enter Your First Name" name="name" id="firstName" required>
+                <label for="first-name"><b>First Name:</b></label>
+                <input type="text" placeholder="Enter Your First Name" name="first-name" id="firstName" required>
 
-                <label for="surname"><b>Surname:</b> </label>
-                <input type="text" placeholder="Enter Your Surname" name="surname" id="surname" required>
+                <label for="last-name"><b>Last Name:</b> </label>
+                <input type="text" placeholder="Enter Your Last Name" name="last-name" id="lastName" required>
 
-                <label for="runnerID"><b>Runner ID:</b></label>
-                <input type="number" placeholder="Enter Your Runner ID">
+                <!-- <label for="runner-id"><b>Runner ID:</b></label>
+                <input type="number" placeholder="Enter Your Runner ID"> -->
 
                 <button id="submit-form" type="submit">Submit</button>
+
+                <div class="runners-container">
+                    <div id = "runner-text">
+                    <p>RunnerID</p>
+                    <p>Position</p>
+                    </div>
+                    <ul id="runner-data"> </ul>
+                </div>
+
 
             </div>
         </form>
