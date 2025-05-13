@@ -18,32 +18,45 @@
         <section id="timer-view" class="view">
             <div class="timer-container">
             <div id="display">
-                00:00:00.00
+                00:00:00
             </div>
             <div class="buttons">
-                <button id="lap-btn"> Lap </button>
                 <button id="reset-btn" style="display : none;"> Reset </button>
+                <!-- <button id="stop-btn" style="display : none;" > Stop </button> -->
+                <button id="stop-btn"> Stop </button>
+                <button id="lap-btn" style="display:none;"> Finisher </button>
                 <button id="start-btn"> Start </button>
-                <button id="stop-btn" style="display : none;" > Stop </button>
             </div>
 
             <div class="laps-container">
                 <div id = "lap-text">
                 <p>Position</p>
+                <p>Bib</p>
                 <p>Time</p>
                 </div>
-                <ul id="lap-data"> </ul>
+                <ul id="lap-data">
+                    <datalist id="bib-list"></datalist>
+                </ul>
             </div>
+            <button id="submit-btn" type="submit">Submit</button>
 
-             <button id="submit-btn" type="submit">Submit</button>
-
-                <!-- <div class="upload-inner">
+            <div class="modal" id="modal">
+                <div class="upload-inner">
                     <h2>Ready to Upload?</h2>
                     <p>Pressing upload means you cannot make any additional changes to the results. </p>
-                    <button id="cancel-btn"> Cancel </button>
-                    <button id="upload-results"> Upload </button>
-                </div> -->
+                        <button id="cancel-btn"> Cancel </button>
+                        <button id="upload-results"> Upload </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id = "current-results-view" class="view" style="display:none">
+        <div id="results-content">
+            <h3>Race Results:</h3>
+            <ul id="results-data"></ul>
+
+            <button id="export-csv">Export to CSV</button>
         </div>
     </section>
 
@@ -51,34 +64,35 @@
         <form action="" id="runner-form">
             <div class="registration-form">
 
-                <h2>Registration Form</h2>
+                <h2>Runner Registration</h2>
 
-                <label for="first-name"><b>First Name:</b></label>
-                <input type="text" placeholder="Enter Your First Name" name="first-name" id="firstName" required>
+                <label for="bib-header" id="bib-header"><b>Enter Bib Number Below:</b></label>
+                <input type="number" id="bib-number" name="bib-number" min="000" max="500" pattern="[0-9]{3}" maxlength="3" placeholder="Enter 3-digit Bib Number">
+                <span id = "bib-error" class="error"></span>
 
-                <label for="last-name"><b>Last Name:</b> </label>
-                <input type="text" placeholder="Enter Your Last Name" name="last-name" id="lastName" required>
-
-                <!-- <label for="runner-id"><b>Runner ID:</b></label>
-                <input type="number" placeholder="Enter Your Runner ID"> -->
-
-                <button id="submit-form" type="submit">Submit</button>
+                <button id="enter-num">Enter</button>
 
                 <div class="runners-container">
                     <div id = "runner-text">
-                    <p>RunnerID</p>
+                    <p>Bib no.</p>
                     <p>Position</p>
                     </div>
                     <ul id="runner-data"> </ul>
                 </div>
-
-
+                <div class="registration-actions">
+                    <button id="reg-reset">Reset</button>
+                    <button id="reg-continue">Continue</button>
+                </div>
             </div>
         </form>
     </section>
 
-    <section id="settings-view" class="view">
-
+    <section id = "results-history-view" class="view" style="display:none">
+        <div id="results-content">
+            <h3>Race History:</h3>
+            <p id="no-results-text">No races have been recorded yet.</p>
+            <div id="race-history"></div>
+        </div>
     </section>
 
 </main>
@@ -86,7 +100,7 @@
 <nav class="nav-items">
     <button id="timer-btn" class="nav-link"> Timer </button>
     <button id="runner-btn" class="nav-link"> Runner </button>
-    <button id="settings-btn" class="nav-link"> Settings </button>
+    <button id="results-history-btn" class="nav-link"> Results </button>
 </nav>
     
 <script src="script.js"></script>
