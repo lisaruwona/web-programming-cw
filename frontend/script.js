@@ -373,6 +373,7 @@ uploadBtn.addEventListener('click', async function (event) {
       modal.style.display = 'none';
 
       const allValidLaps = laps.filter(lap => !lap.flagged);
+      // eslint-disable-next-line no-unused-vars
       lapData.innerHTML = allValidLaps.map((lap, index) => `
         <li class="lap-li ${lap.flagged ? 'flagged' : ''}">
           <span class="lap-position">${lap.position}</span>
@@ -450,7 +451,6 @@ async function exportToCSV() {
     alert('An error occured while exporting CSV: ' + error.message);
   }
 }
-
 
 prepareStartListener();
 prepareStopListener();
