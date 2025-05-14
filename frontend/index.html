@@ -61,7 +61,7 @@
     </section>
 
     <section id="registration-view" class="view">
-        <form action="" id="runner-form">
+        <form action="" id="runner-form" onsubmit="return false">
             <div class="registration-form">
 
                 <h2>Runner Registration</h2>
@@ -70,19 +70,18 @@
                 <input type="number" id="bib-number" name="bib-number" min="000" max="500" pattern="[0-9]{3}" maxlength="3" placeholder="Enter 3-digit Bib Number">
                 <span id = "bib-error" class="error"></span>
 
-                <button id="enter-num">Enter</button>
-
-                <div class="runners-container">
-                    <div id = "runner-text">
-                    <p>Bib no.</p>
-                    <p>Position</p>
-                    </div>
-                    <ul id="runner-data"> </ul>
+                <button id="enter-num" type="button">Enter</button>
+            </div>
+            <div class="runners-container">
+                <div id = "runner-text">
+                <p>Bib no.</p>
+                <p>Position</p>
                 </div>
-                <div class="registration-actions">
-                    <button id="reg-reset">Reset</button>
-                    <button id="reg-continue">Continue</button>
-                </div>
+                <ul id="runner-data"> </ul>
+            </div>
+            <div class="registration-actions">
+                <button id="reg-reset" type="button">Reset</button>
+                <button id="reg-continue" type="button">Continue</button>
             </div>
         </form>
     </section>

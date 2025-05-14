@@ -1,17 +1,4 @@
-// // Service worker registration
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker.register('/sw.js')
-//       .then(registration => {
-//         console.log('Service worker registration successful');
-//       });
-//   })
-//     .catch(err => {
-//       console.log('ServiceWorker registration failed: ', err);
-//     });
-// }
-
-let raceHistory = JSON.parse(localStorage.getItem('raceHistory') || '[]');
+const raceHistory = JSON.parse(localStorage.getItem('raceHistory') || '[]');
 
 // SPA views and Nav buttons
 const views = {
@@ -250,10 +237,16 @@ regResetBtn.addEventListener('click', () => {
 
 // Fetches timer results
 async function fetchResults() {
+  if (!navigator.onLine) return;
   try {
     const response = await fetch('http://localhost:3000/results');
+    if (!response.ok) {
+      throw new Error(`Server responded with ${response.status}`);
+    }
+
     const results = await response.json();
     const resultsData = document.getElementById('results-data');
+
     resultsData.innerHTML = results.map(r => `
         <li class = "results-li">
             <span class = "result-position">${r.position}</span>
@@ -262,9 +255,38 @@ async function fetchResults() {
         </li>
     `).join('');
   } catch (error) {
-    alert('Error fetching results: ' + error.message);
+    console.error('Error fetching results: ' + error.message);
+    alert('Unable to load results right now. Please try again later.');
   }
 }
+
+// offline mode
+function enqueueResult(result) {
+  const queue = JSON.parse(localStorage.getItem('outbox') || '[]');
+  queue.push(result);
+  localStorage.setItem('outbox', JSON.stringify(queue));
+}
+
+async function flushOutbox() {
+  if (navigator.onLine) return;
+  const queue = JSON.parse(localStorage.getItem('outbox') || '[]');
+  if (!queue.length) return;
+  for (const result of queue) {
+    try {
+      await fetch('http://localhost:3000/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(result),
+      });
+    } catch (err) {
+      console.error('Sync failed, will retry', err);
+      return;
+    }
+  }
+  localStorage.removeItem('outbox');
+}
+
+window.addEventListener('online', flushOutbox);
 
 // Upload Results and History
 uploadBtn.addEventListener('click', async function (event) {
@@ -293,6 +315,13 @@ uploadBtn.addEventListener('click', async function (event) {
     finishTime: li.querySelector('.lap-time').textContent,
   }));
 
+  if (!navigator.onLine) {
+    resultsToUpload.forEach(enqueueResult);
+    alert('You are Offline - results have been stored and will auto - sync when you are back online.');
+    showView('current');
+    await fetchResults();
+    return;
+  }
 
   try {
     const uploadPromises = resultsToUpload.map(async (result) => {
@@ -391,8 +420,8 @@ function renderRaceHistory() {
     const card = document.createElement('div');
     card.className = 'race-card';
     const when = new Date(rec.recordedAt).toLocaleString();
-    card.innerHTML = `<header>${when}</header> <ul>${rec.entries.map(e=>
-      `<li><span>${e.position}</span><span>${e.bibNumber}</span><span>${e.finishTime}</span></li>`
+    card.innerHTML = `<header>${when}</header> <ul>${rec.entries.map(e =>
+      `<li><span>${e.position}</span><span>${e.bibNumber}</span><span>${e.finishTime}</span></li>`,
     ).join('')}</ul>`;
     container.append(card);
   });
@@ -421,6 +450,7 @@ async function exportToCSV() {
     alert('An error occured while exporting CSV: ' + error.message);
   }
 }
+
 
 prepareStartListener();
 prepareStopListener();
